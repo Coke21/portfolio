@@ -1,0 +1,76 @@
+﻿@page "/"
+<PageTitle>Home | Coke's Portfolio</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudPaper Class="pa-6" Elevation="3"> 
+        <MudContainer Class="d-flex">
+            <MudAvatar Class="mud-elevation-25">
+                <MudIcon Icon="fas fa-hand-peace" />
+            </MudAvatar>
+
+            <MudText Class="ml-2" Typo="Typo.h4" GutterBottom="true">Hi, I'm Artur (also known as Coke)??? and I create stuff for people!</MudText>
+        </MudContainer>
+
+        <MudText Typo="Typo.body1">
+            Welcome to my online portfolio. This Web app was created to showcase my work for potential employer. Please take a look at the sections below to learn more about me and what I do.
+        </MudText>
+
+        @*https://www.springboard.com/blog/careersmithing/programmer-portfolio/*@
+
+        @*About me*@
+        <MudContainer Class="d-flex align-center mt-4">
+            <MudAvatar Class="mud-elevation-25">
+                <MudIcon Icon="@Icons.Filled.Info"/>
+            </MudAvatar>
+
+            <MudText Class="ml-2" Typo="Typo.h5">About me</MudText>
+        </MudContainer>
+
+        <MudText Class="mt-2" Typo="Typo.body1">
+            My name is Artur and I live in Warsaw. I've been programming for 3 years now, mainly in C# but I also program in TypeScript/JavaScript. I love solving programming problems and automating daily tasks.
+            If you would like to check my portfolio, please take a look at the <b>Projects</b> section below.
+        </MudText>
+
+        @*Projects*@
+        <MudContainer Class="d-flex align-center mt-4">
+            <MudAvatar Class="mud-elevation-25">
+                <MudIcon Icon="@Icons.Filled.Apps"/>
+            </MudAvatar>
+
+            <MudText Class="ml-2" Typo="Typo.h5">Projects</MudText>
+        </MudContainer>
+
+        <MudText Class="mt-2" Typo="Typo.body1">
+            I have created a number of various apps which help people around the world. 
+            The problems that I solve revolve around creating various types of applications, ranging from Windows apps, Chrome extensions??? to websites.
+            Please take a look at my <MudLink Href="/projects"><b>projects</b></MudLink>.
+        </MudText>
+
+        @*Contact me*@
+        <MudContainer Class="d-flex align-center mt-4">
+            <MudAvatar Class="mud-elevation-25">
+                <MudIcon Icon="@Icons.Filled.Message"/>
+            </MudAvatar>
+
+            <MudText Class="ml-2" Typo="Typo.h5">Contact me</MudText>
+        </MudContainer>
+
+        <MudText Class="mt-2" Typo="Typo.body1" GutterBottom="true">
+            Please see below services wherein I can be contacted:
+        </MudText>
+
+        <MudButtonGroup Class="d-flex justify-center" Color="Color.Primary" Variant="Variant.Outlined">
+            <MudLink Href="https://github.com/Coke21" Target="_blank" Underline="Underline.None">
+                <MudButton StartIcon="@Icons.Custom.Brands.GitHub" IconColor="Color.Primary">
+                    GitHub
+                </MudButton>
+            </MudLink>
+
+            <MudLink Href="https://www.linkedin.com/in/artur21" Target="_blank" Underline="Underline.None">
+                <MudButton StartIcon="@Icons.Custom.Brands.LinkedIn" IconColor="Color.Primary">
+                    LinkedIn
+                </MudButton>
+            </MudLink>
+        </MudButtonGroup>
+    </MudPaper>
+</MudContainer>

@@ -1,0 +1,27 @@
+using Blazor.Analytics;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
+
+namespace CokesPortfolio.Client
+{
+    partial class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.RootComponents.Add<App>("#app");
+            builder.RootComponents.Add<HeadOutlet>("head::after");
+
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddMudServices();
+
+            //https://analytics.google.com/analytics/web/#/a198042450p293039753/admin/streams/promo/
+            //get the id from the link above, create Data Streams in CokesPortfolio
+            //the id is done, remember to update the url when the website is live in analytics
+            builder.Services.AddGoogleAnalytics("G-W3J6WXSL2C");
+
+            await builder.Build().RunAsync();
+        }
+    }
+}
