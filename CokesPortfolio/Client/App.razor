@@ -1,16 +1,22 @@
-﻿<MudThemeProvider/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
-
-<Router AppAssembly="@typeof(App).Assembly">
+﻿<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
-    <NotFound>
+@*    <NotFound>
         <PageTitle>Not found</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
             <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>*@
+
+    <NotFound>
+        <PageTitle>Not Found | Artur's Portfolio</PageTitle>
+
+        <LayoutView Layout="@typeof(MainLayout)">
+            <MudContainer Class="d-flex justify-center mt-10" MaxWidth="MaxWidth.ExtraLarge">
+                <MudText Align="Align.Center" Typo="Typo.h3">Sorry, there's nothing at this address <MudIcon Icon="fas fa-frown" Size="Size.Large" /></MudText>
+            </MudContainer>
         </LayoutView>
     </NotFound>
 </Router>

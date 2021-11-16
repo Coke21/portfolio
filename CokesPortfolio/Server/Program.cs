@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Net.Http.Headers;
 
 namespace CokesPortfolio.Server
 {
@@ -37,6 +38,22 @@ namespace CokesPortfolio.Server
             app.MapRazorPages();
             app.MapControllers();
             app.MapFallbackToFile("index.html");
+
+            //Experimental from https://github.com/MudBlazor/MudBlazor/issues/2350
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = context =>
+                {
+                    var headers = context.Context.Response.GetTypedHeaders();
+
+                    //require browsers to pick up static file changes on refresh/reload
+                    headers.CacheControl = new CacheControlHeaderValue()
+                    {
+                        Private = true,
+                        NoCache = true
+                    };
+                }
+            });
 
             app.Run();
         }

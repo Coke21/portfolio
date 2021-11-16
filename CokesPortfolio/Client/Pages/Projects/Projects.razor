@@ -1,0 +1,58 @@
+﻿@page "/projects"
+<PageTitle>Projects | Artur's Portfolio</PageTitle>
+
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.ExtraLarge">
+    <MudPaper Class="pa-6" Elevation="5">
+        <MudContainer Class="d-flex" MaxWidth="MaxWidth.ExtraLarge">
+            <MudAvatar Class="mud-elevation-25 mt-2">
+                <MudIcon Icon="@Icons.Filled.Apps" />
+            </MudAvatar>
+
+            <MudText Class="ml-2" Style="font-weight: bold" Typo="Typo.h3" GutterBottom="true">Projects</MudText>
+        </MudContainer>
+
+        <MudText Typo="Typo.body1" GutterBottom="true">This page shows projects that were created by me. The contents??? are divided into separate programming languages and appropriate frameworks/technologies.</MudText>
+
+        <MudGrid>
+            <MudItem xs="12">
+                <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">C#</MudText>
+
+                <MudExpansionPanels MultiExpansion="true">
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET 6.0">
+                        
+                    </MudExpansionPanel>
+
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET 5.0">
+                        
+                    </MudExpansionPanel>
+
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET 3.1">
+                        
+                    </MudExpansionPanel>
+
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET Framework 4.8">
+                        
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">TypeScript/JavaScript</MudText>
+
+                <MudExpansionPanels MultiExpansion="true">
+                    <MudExpansionPanel Style="font-weight: bold" Text="TypeScript">
+                        
+                    </MudExpansionPanel>
+
+                    <MudExpansionPanel Style="font-weight: bold" Text="React TypeScript">
+                        
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+</MudContainer>
+
+@code {
+
+}

@@ -1,4 +1,6 @@
 using Blazor.Analytics;
+using Blazored.LocalStorage;
+using CokesPortfolio.Client.Utilities;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -14,12 +16,16 @@ namespace CokesPortfolio.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddMudServices();
+            builder.Services.AddSingleton<ThemeManager>();
 
+            builder.Services.AddMudServices();
+            builder.Services.AddBlazoredLocalStorage();
             //https://analytics.google.com/analytics/web/#/a198042450p293039753/admin/streams/promo/
             //get the id from the link above, create Data Streams in CokesPortfolio
             //the id is done, remember to update the url when the website is live in analytics
             builder.Services.AddGoogleAnalytics("G-W3J6WXSL2C");
+
+            builder.Logging.SetMinimumLevel(builder.HostEnvironment.IsDevelopment() ? LogLevel.Debug : LogLevel.None);
 
             await builder.Build().RunAsync();
         }

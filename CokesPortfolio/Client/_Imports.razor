@@ -1,5 +1,7 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using Blazored.LocalStorage
+@using CokesPortfolio.Client.Utilities
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -11,3 +13,7 @@
 @using MudBlazor
 @using Blazor.Analytics
 @using Blazor.Analytics.Components
+
+@inject HttpClient HttpClient
+@inject ThemeManager ThemeManager
+@inject ILocalStorageService LocalStorage
