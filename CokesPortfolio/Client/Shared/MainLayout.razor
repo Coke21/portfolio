@@ -7,14 +7,20 @@
 <MudLayout>
     <MudAppBar Elevation="1" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+
         <MudSpacer />
 
         <MudTooltip Text="Toggle theme">
             <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@(() => SwitchMode())"/>
         </MudTooltip>
         <MudDivider Class="mx-4 my-3" FlexItem="true" Vertical="true"/>
+
         <MudTooltip Text="View my GitHub">
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/Coke21" Target="_blank" />
+        </MudTooltip>
+
+        <MudTooltip Text="View my LinkedIn">
+            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Link="https://www.linkedin.com/in/artur21" Target="_blank" />
         </MudTooltip>
     </MudAppBar>
 
@@ -33,6 +39,10 @@
             @Body
         </MudContainer>
     </MudMainContent>
+
+    <MudScrollToTop>
+        <MudFab Color="Color.Primary" Icon="@Icons.Filled.KeyboardArrowUp"/>
+    </MudScrollToTop>
 </MudLayout>
 
 @code {

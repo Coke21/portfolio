@@ -18,20 +18,141 @@
                 <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">C#</MudText>
 
                 <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Style="font-weight: bold" Text=".NET 6.0">
-                        
+                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET 6.0">
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/folderopen.png" alt="folderopen.png icon" />
+
+                                        <MudText>Artur's Portfolio</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <ArtursPortfolio/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Text="Variable Patcher">
+                                <VariablePatcher/>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
                     </MudExpansionPanel>
 
                     <MudExpansionPanel Style="font-weight: bold" Text=".NET 5.0">
-                        
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
+
+                                        <MudText>GTA Discord Bot</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <GtaDiscordBot/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
+
+                                        <MudText>Coke's Ban Checker</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <CokesBanChecker/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
+
+                                        <MudText>Buffy's Discord Bot</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <BuffysDiscordBot/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <MudIcon Class="mr-1" Icon="@Icons.Filled.Api"/>
+
+                                        <MudText>Discord Bot API</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <DiscordBotApi/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
                     </MudExpansionPanel>
 
-                    <MudExpansionPanel Style="font-weight: bold" Text=".NET 3.1">
-                        
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET Core 3.1">
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <MudIcon Class="mr-1" Icon="@Icons.Filled.Upload"/>
+
+                                        <MudText>Application Uploader</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <ApplicationUploader/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
+
+                                        <MudText>GTA Mission Downloader</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <GtaMissionDownloader/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/google.png" alt="google.png icon" />
+
+                                        <MudText>E-Mail Sender</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <EMailSender/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
                     </MudExpansionPanel>
 
-                    <MudExpansionPanel Style="font-weight: bold" Text=".NET Framework 4.8">
-                        
+                    <MudExpansionPanel Style="font-weight: bold" Text=".NET Framework 4.7.2">
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon" />
+
+                                        <MudText>BattleMetrics Notifier</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <BattleMetricsNotifier/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
                     </MudExpansionPanel>
                 </MudExpansionPanels>
             </MudItem>
