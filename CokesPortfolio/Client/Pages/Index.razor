@@ -1,7 +1,7 @@
 ﻿@page "/"
 <PageTitle>Home | Artur's Portfolio</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+<MudContainer Class="mt-16 mb-16" MaxWidth="MaxWidth.Large">
     <MudPaper Class="pa-6" Elevation="3"> 
         <MudContainer Class="d-flex">
             <MudAvatar Class="mud-elevation-25">
@@ -28,8 +28,48 @@
 
         <MudText Class="mt-2" Typo="Typo.body1">
             My name is Artur and I live in Warsaw. I'm a Warsaw University alumnus in English studies (Master of Arts). I'm a self-taught programmer who has been programming for 3 years now, mainly in C# but I also program in TypeScript/JavaScript.
-            I love solving programming problems and automating daily tasks. I believe that I have enough knowledge to finally start my professional career in this field and learn from colleagues better than me.
-            If you would like to view my portfolio, please take a look at the <b>Projects</b> section below.
+            I love solving programming problems and automating daily tasks. I would like to finally start my professional career and further develop my knowledge in this field.
+        </MudText>
+
+        @*Stuff Used*@
+        <MudContainer Class="d-flex align-center mt-4">
+            <MudAvatar Class="mud-elevation-25">
+                <MudIcon Icon="@Icons.Filled.Build"/>
+            </MudAvatar>
+
+            <MudText Class="ml-2" Typo="Typo.h5">Summary of my programming experience</MudText>
+        </MudContainer>
+
+        <MudText Class="mt-2" Typo="Typo.body1">
+            This section shows quick overview of what I have used:
+
+            <MudList>
+                <MudListItem>
+                    <strong>Programming languages</strong>: C#, TypeScript/JavaScript
+                </MudListItem>
+
+                <MudListItem>
+                    <strong>Database</strong>: PostgreSQL, Azure SQL Database
+                </MudListItem>
+
+                <MudListItem>
+                    <strong>Database mapper</strong>: Entity Framework Core, Dapper
+                </MudListItem>
+
+                <MudListItem>
+                    <strong>Application hosting</strong>: Heroku, Azure
+                </MudListItem>
+
+                <MudListItem>
+                    <strong>Source code hosting</strong>: GitHub
+                </MudListItem>
+
+                <MudListItem>
+                    <strong>Frameworks used</strong>: .NET Framework, .NET Core, .NET, React
+                </MudListItem>
+            </MudList>
+
+            For in-depth look, please browse through my <MudLink Href="/projects"><b>projects</b></MudLink>.
         </MudText>
 
         @*Projects*@
@@ -42,9 +82,8 @@
         </MudContainer>
 
         <MudText Class="mt-2" Typo="Typo.body1">
-            I have created a number of various apps which help people around the world. 
-            The problems that I solve revolve around creating various types of applications, ranging from Windows apps, website extensions??? to websites.
-            Please take a look at my <MudLink Href="/projects"><b>projects</b></MudLink>.
+            I have created a number of various applications which help people around the world. These apps vary from Windows apps, website extensions to websites.
+            If you would like to browse through my projects, take a look <MudLink Href="/projects"><b>here</b></MudLink>.
         </MudText>
 
         @*Contact me*@

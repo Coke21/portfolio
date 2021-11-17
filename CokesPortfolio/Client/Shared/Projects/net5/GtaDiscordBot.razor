@@ -1,4 +1,49 @@
-﻿<h3>GtaDiscordBot</h3>
+﻿
+<MudContainer Class="mt-1" MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.body1" GutterBottom="true">
+        Summary:
+    </MudText>
+
+    <MudList>
+        <MudListItem>
+            <strong>Application Type</strong>: Console Application
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Hosting</strong>: Heroku
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Source Code</strong>: GitHub -> <strong>unavailable</strong>, the project consists of private tokens; the source code can be shown if requested
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Main Aim</strong>: Support Discord users with commands and message system which help them do their daily tasks more efficient
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Usage</strong>: The Discord bot is active in 2 Discord guilds which includes??? over 150 users; there are currently 23 commands some of which??? are used daily
+        </MudListItem>
+
+        <MudDivider />
+
+        <MudListItem Text="Example commands:" InitiallyExpanded="true">
+            <NestedList>
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    !check SteamId -> this is the most used command; it checks ban status of a player in a number of different services; <MudLink Href="icons/check.png" Target="_blank">usage example</MudLink>
+                </MudListItem>
+
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    !banFriends SteamId -> the command is used to ban all friends of SteamId
+                </MudListItem>
+
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    !checkip SteamId -> the command is used to check if IP that was used by SteamId was used by any other SteamId
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</MudContainer>
 
 @code {
 

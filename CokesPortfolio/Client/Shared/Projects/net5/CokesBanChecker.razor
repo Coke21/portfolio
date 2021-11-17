@@ -1,4 +1,68 @@
-﻿<h3>CokesBanChecker</h3>
+﻿
+<MudContainer Class="mt-1" MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.body1" GutterBottom="true">
+        Summary:
+    </MudText>
+
+    <MudList>
+        <MudListItem>
+            <strong>Web Framework</strong>: Blazor (ASP.NET Core Hosted)
+        </MudListItem>
+
+        <MudListItem>
+            <strong>UI Framework</strong>: MudBlazor
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Hosting</strong>: Heroku -> the application can be accessed <MudLink Href="https://cokesbanchecker.herokuapp.com" Target="_blank">here</MudLink>
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Source Code</strong>: GitHub -> <strong>unavailable</strong>, the project consists of private tokens; the source code can be shown if requested
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Main Aim</strong>: Provide ArmA 3 (video game) players ability to check the ban status of other players
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Usage</strong>: Google Analytics collects the usage data; the Web application currently has nearly 250 registered players
+        </MudListItem>
+
+        <MudListItem>
+            <strong>Pictures</strong>: main page (after SteamId authentication) can be seen <MudLink Href="icons/cbc.png" Target="_blank">here</MudLink>; 
+            check service can be seen <MudLink Href="icons/cbccheck.png" Target="_blank">here</MudLink>
+        </MudListItem>
+    </MudList>
+
+    <MudText Typo="Typo.body1" GutterBottom="true">
+        Description:<br/>
+        Coke's Ban Checker is one of the most advanced project in my portfolio. It has the following features:
+
+        <MudList>
+            <MudListItem>
+                <strong>OpenId authentication for Steam</strong>: Users are required to authenticate their SteamId in order to use the website
+            </MudListItem>
+
+            <MudListItem>
+                <strong>Database</strong>: PostgreSQL
+            </MudListItem>
+
+            <MudListItem>
+                <strong>Database mapper</strong>: Entity Framework Core
+            </MudListItem>
+
+            <MudListItem>
+                <strong>API</strong>: Users can create their own JWT Web Token in order to use the API which services are connected to. Furthermore, users can access Swagger documentation of the API
+            </MudListItem>
+
+            <MudListItem>
+                <strong>Roles</strong>: Each user has their own role, depending on the role s/he can use and see different pages. The user who possesses admin role can change users' roles through the Web application
+            </MudListItem>
+        </MudList>
+    </MudText>
+
+</MudContainer>
 
 @code {
 
