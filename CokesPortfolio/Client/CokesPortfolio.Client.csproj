@@ -34,6 +34,12 @@
     <Content Update="wwwroot\icons\bm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\icons\bmn1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\icons\bmn2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\icons\cbc.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
