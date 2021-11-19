@@ -9,10 +9,6 @@
             </MudAvatar>
 
             <MudText Class="ml-2" Style="font-weight: bold" Typo="Typo.h3" GutterBottom="true">Projects</MudText>
-
-            <MudTooltip Text="Expand all projects" Placement="Placement.Top">
-                <MudCheckBox Class="ml-1 mt-2" T="bool" Checked="@ExpandProjects" CheckedChanged="@ExpandProjectsChanged" Color="Color.Primary">Expand projects</MudCheckBox>
-            </MudTooltip>
         </MudContainer>
 
         <MudText Typo="Typo.body1" GutterBottom="true">This page shows projects that were created by me. The contents??? are divided into separate programming languages and appropriate frameworks.</MudText>
@@ -24,7 +20,7 @@
                 <MudExpansionPanels MultiExpansion="true">
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET 6.0">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsArturExpanded" IsExpandedChanged="@ArturAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/folderopen.png" alt="folderopen.png icon" />
@@ -54,7 +50,7 @@
 
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET 5.0">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGtaDiscordExpanded" IsExpandedChanged="@GtaDiscordAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
@@ -67,7 +63,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsCokeBanExpanded" IsExpandedChanged="@CokeBanAppExpanded">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
@@ -80,7 +76,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsBuffysDiscordExpanded" IsExpandedChanged="@BuffysDiscordAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
@@ -93,7 +89,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsDiscordApiExpanded" IsExpandedChanged="@DiscordApiAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <MudIcon Class="mr-1" Icon="@Icons.Filled.Api"/>
@@ -110,7 +106,7 @@
 
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET Core 3.1">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsAppUploaderExpanded" IsExpandedChanged="@AppUploaderChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <MudIcon Class="mr-1" Icon="@Icons.Filled.Upload"/>
@@ -123,7 +119,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGtaMissionExpanded" IsExpandedChanged="@GtaMissionAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
@@ -136,7 +132,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsEmailExpanded" IsExpandedChanged="@EmailSenderAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/google.png" alt="google.png icon" />
@@ -153,7 +149,7 @@
 
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET Framework 4.7.2">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@ExpandProjects">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsBmNotifierExpanded" IsExpandedChanged="@BmNotifierAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon" />
@@ -188,15 +184,119 @@
 </MudContainer>
 
 @code {
+    ProjectsModel ProjectsModel { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        ExpandProjects = await LocalStorage.GetItemAsync<bool>("ExpandProjects");
+        var model = await LocalStorage.GetItemAsync<ProjectsModel>("Projects");
+        if (model is null)
+        {
+            model = new ProjectsModel();
+            ProjectsModel = model;
+            await LocalStorage.SetItemAsync("Projects", model);
+        } 
+        else
+        {
+            ProjectsModel = model;
+
+            IsArturExpanded = model.IsArturExpanded;
+            IsGtaDiscordExpanded = model.IsGtaDiscordExpanded;
+            IsCokeBanExpanded = model.IsCokeBanExpanded;
+            IsBuffysDiscordExpanded = model.IsBuffysDiscordExpanded;
+            IsDiscordApiExpanded = model.IsDiscordApiExpanded;
+            IsAppUploaderExpanded = model.IsAppUploaderExpanded;
+            IsGtaMissionExpanded = model.IsGtaMissionExpanded;
+            IsEmailExpanded = model.IsEmailExpanded;
+            IsBmNotifierExpanded = model.IsBmNotifierExpanded;
+        }
     }
 
-    bool ExpandProjects { get; set; }
-    async Task ExpandProjectsChanged(bool isChecked)
+    bool IsArturExpanded { get; set; }
+    async Task ArturAppChanged(bool isChecked)
     {
-        ExpandProjects = isChecked;
-        await LocalStorage.SetItemAsync<bool>("ExpandProjects", isChecked);
+        if (ProjectsModel.IsArturExpanded == isChecked)
+            return;
+            
+        ProjectsModel.IsArturExpanded = IsArturExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsGtaDiscordExpanded { get; set; }
+    async Task GtaDiscordAppChanged(bool isChecked)
+    {
+        if (ProjectsModel.IsGtaDiscordExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsGtaDiscordExpanded = IsGtaDiscordExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsCokeBanExpanded { get; set; }
+    async Task CokeBanAppExpanded(bool isChecked)
+    {
+        if (ProjectsModel.IsCokeBanExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsCokeBanExpanded = IsCokeBanExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsBuffysDiscordExpanded {  get;  set; }
+    async Task BuffysDiscordAppChanged(bool isChecked)
+    {
+        if (ProjectsModel.IsBuffysDiscordExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsBuffysDiscordExpanded = IsBuffysDiscordExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsDiscordApiExpanded { get; set; }
+    async Task DiscordApiAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsDiscordApiExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsDiscordApiExpanded = IsDiscordApiExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsAppUploaderExpanded { get; set; }
+    async Task AppUploaderChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsAppUploaderExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsAppUploaderExpanded = IsAppUploaderExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsGtaMissionExpanded { get; set; }
+    async Task GtaMissionAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsGtaMissionExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsGtaMissionExpanded = IsGtaMissionExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsEmailExpanded { get; set; }
+    async Task EmailSenderAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsEmailExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsEmailExpanded = IsEmailExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsBmNotifierExpanded { get; set; }
+    async Task BmNotifierAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsBmNotifierExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsBmNotifierExpanded = IsBmNotifierExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
     }
 }
