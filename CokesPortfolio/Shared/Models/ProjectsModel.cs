@@ -12,5 +12,8 @@ namespace CokesPortfolio.Shared.Models
         public bool IsGtaMissionExpanded { get; set; }
         public bool IsEmailExpanded { get; set; }
         public bool IsBmNotifierExpanded { get; set; }
+
+        public bool IsGameCpExpanded { get; set; }
+        public bool IsCokesBanExtExpanded { get; set; }
     }
 }

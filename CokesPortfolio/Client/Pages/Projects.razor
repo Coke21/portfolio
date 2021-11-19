@@ -171,11 +171,33 @@
 
                 <MudExpansionPanels MultiExpansion="true">
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text="TypeScript">
-                        
-                    </MudExpansionPanel>
+                        <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGameCpExpanded" IsExpandedChanged="@GameCpAppChanged">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
 
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text="React TypeScript">
-                        
+                                        <MudText>GameCP-Shortcut</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <GameCpShortcut/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                            
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsCokesBanExtExpanded" IsExpandedChanged="@CokesBanExtAppChanged">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
+
+                                        <MudText>Coke's Ban Checker Extension</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <CokesBanCheckerExtension/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
                     </MudExpansionPanel>
                 </MudExpansionPanels>
             </MudItem>
@@ -207,6 +229,8 @@
             IsGtaMissionExpanded = model.IsGtaMissionExpanded;
             IsEmailExpanded = model.IsEmailExpanded;
             IsBmNotifierExpanded = model.IsBmNotifierExpanded;
+            IsGameCpExpanded = model.IsGameCpExpanded;
+            IsCokesBanExtExpanded = model.IsCokesBanExtExpanded;
         }
     }
 
@@ -297,6 +321,26 @@
             return;
 
         ProjectsModel.IsBmNotifierExpanded = IsBmNotifierExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsGameCpExpanded { get; set; }
+    async Task GameCpAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsGameCpExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsGameCpExpanded = IsGameCpExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsCokesBanExtExpanded { get; set; }
+    async Task CokesBanExtAppChanged(bool isChecked)
+    {
+        if (ProjectsModel.IsCokesBanExtExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsCokesBanExtExpanded = IsCokesBanExtExpanded = isChecked;
         await LocalStorage.SetItemAsync("Projects", ProjectsModel);
     }
 }
