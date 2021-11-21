@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Net.Http.Headers;
 
 namespace CokesPortfolio.Server
@@ -28,9 +29,14 @@ namespace CokesPortfolio.Server
             }
 
             app.UseHttpsRedirection();
-
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
+
+            //Change HTTP to HTTPS
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
 
             app.UseRouting();
 
