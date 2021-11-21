@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Net.Http.Headers;
 
 namespace CokesPortfolio.Server

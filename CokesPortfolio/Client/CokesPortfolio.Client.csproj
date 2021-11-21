@@ -46,6 +46,9 @@
     <Content Update="wwwroot\icons\cbccheck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\icons\cbcextension.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\icons\check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -59,6 +62,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\icons\folderopen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\icons\gamecpshortcut.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\icons\gavel.png">

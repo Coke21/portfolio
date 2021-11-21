@@ -20,9 +20,6 @@ namespace CokesPortfolio.Client
 
             builder.Services.AddMudServices();
             builder.Services.AddBlazoredLocalStorage();
-            //https://analytics.google.com/analytics/web/#/a198042450p293039753/admin/streams/promo/
-            //get the id from the link above, create Data Streams in CokesPortfolio
-            //the id is done, remember to update the url when the website is live in analytics
             builder.Services.AddGoogleAnalytics("G-SS7LV9P7KE");
 
             builder.Logging.SetMinimumLevel(builder.HostEnvironment.IsDevelopment() ? LogLevel.Debug : LogLevel.None);
