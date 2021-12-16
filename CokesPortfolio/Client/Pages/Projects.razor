@@ -33,12 +33,12 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Disabled="true">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsVariablePatcherExpanded" IsExpandedChanged="@VariablePatcherAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <MudIcon Class="mr-1" Icon="@Icons.Filled.AutoFixHigh"/>
 
-                                        <MudText>Variable Patcher (WIP)</MudText>
+                                        <MudText>Variable Patcher</MudText>
                                     </div>
                                 </TitleContent>
                                 <ChildContent>
@@ -149,10 +149,23 @@
 
                     <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET Framework 4.7.2">
                         <MudExpansionPanels MultiExpansion="true">
+                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsInlineSkatesManagerExpanded" IsExpandedChanged="@InlineSkatesManagerAppChanged">
+                                <TitleContent>
+                                    <div class="d-flex align-center">
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/ismicon.png" alt="ismicon.png icon" />
+
+                                        <MudText>Inline Skates Manager</MudText>
+                                    </div>
+                                </TitleContent>
+                                <ChildContent>
+                                    <InlineSkatesManager/>
+                                </ChildContent>
+                            </MudExpansionPanel>
+
                             <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsBmNotifierExpanded" IsExpandedChanged="@BmNotifierAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon" />
+                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon"/>
 
                                         <MudText>BattleMetrics Notifier</MudText>
                                     </div>
@@ -221,6 +234,7 @@
             ProjectsModel = model;
 
             IsArturExpanded = model.IsArturExpanded;
+            IsVariablePatcherExpanded = model.IsVariablePatcherExpanded;
             IsGtaDiscordExpanded = model.IsGtaDiscordExpanded;
             IsCokeBanExpanded = model.IsCokeBanExpanded;
             IsBuffysDiscordExpanded = model.IsBuffysDiscordExpanded;
@@ -228,6 +242,7 @@
             IsAppUploaderExpanded = model.IsAppUploaderExpanded;
             IsGtaMissionExpanded = model.IsGtaMissionExpanded;
             IsEmailExpanded = model.IsEmailExpanded;
+            IsInlineSkatesManagerExpanded = model.IsInlineSkatesManagerExpanded;
             IsBmNotifierExpanded = model.IsBmNotifierExpanded;
             IsGameCpExpanded = model.IsGameCpExpanded;
             IsCokesBanExtExpanded = model.IsCokesBanExtExpanded;
@@ -241,6 +256,16 @@
             return;
             
         ProjectsModel.IsArturExpanded = IsArturExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsVariablePatcherExpanded { get; set; }
+    async Task VariablePatcherAppChanged(bool isChecked)
+    {
+        if (ProjectsModel.IsVariablePatcherExpanded == isChecked)
+            return;
+            
+        ProjectsModel.IsVariablePatcherExpanded = IsVariablePatcherExpanded = isChecked;
         await LocalStorage.SetItemAsync("Projects", ProjectsModel);
     }
 
@@ -311,6 +336,16 @@
             return;
 
         ProjectsModel.IsEmailExpanded = IsEmailExpanded = isChecked;
+        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+    }
+
+    bool IsInlineSkatesManagerExpanded { get; set; }
+    async Task InlineSkatesManagerAppChanged(bool isChecked) 
+    {
+        if (ProjectsModel.IsInlineSkatesManagerExpanded == isChecked)
+            return;
+
+        ProjectsModel.IsInlineSkatesManagerExpanded = IsInlineSkatesManagerExpanded = isChecked;
         await LocalStorage.SetItemAsync("Projects", ProjectsModel);
     }
 
