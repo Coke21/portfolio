@@ -1,5 +1,5 @@
 ﻿
-namespace CokesPortfolio.Shared.Models
+namespace CokesPortfolio.Client.Utilities.Models
 {
     public class ProjectsModel
     {
