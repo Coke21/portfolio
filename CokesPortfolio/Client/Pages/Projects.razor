@@ -5,7 +5,7 @@
     <MudPaper Class="pa-6" Elevation="5">
         <MudContainer Class="d-flex" MaxWidth="MaxWidth.ExtraLarge">
             <MudAvatar Class="mud-elevation-25 mt-2">
-                <MudIcon Icon="@Icons.Filled.Apps" />
+                <MudIcon Icon="@Icons.Material.Filled.Apps" />
             </MudAvatar>
 
             <MudText Class="ml-2" Style="font-weight: bold" Typo="Typo.h3" GutterBottom="true">Projects</MudText>
@@ -18,9 +18,9 @@
                 <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">C#</MudText>
 
                 <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET 6.0">
+                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET 6.0">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsArturExpanded" IsExpandedChanged="@ArturAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsArturExpanded" ExpandedChanged="@ArturAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/folderopen.png" alt="folderopen.png icon" />
@@ -33,10 +33,10 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsVariablePatcherExpanded" IsExpandedChanged="@VariablePatcherAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsVariablePatcherExpanded" ExpandedChanged="@VariablePatcherAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Filled.AutoFixHigh"/>
+                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.AutoFixHigh"/>
 
                                         <MudText>Variable Patcher</MudText>
                                     </div>
@@ -48,9 +48,9 @@
                         </MudExpansionPanels>
                     </MudExpansionPanel>
 
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET 5.0">
+                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET 5.0">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGtaDiscordExpanded" IsExpandedChanged="@GtaDiscordAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGtaDiscordExpanded" ExpandedChanged="@GtaDiscordAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
@@ -63,7 +63,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsCokeBanExpanded" IsExpandedChanged="@CokeBanAppExpanded">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsCokeBanExpanded" ExpandedChanged="@CokeBanAppExpanded">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
@@ -76,7 +76,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsBuffysDiscordExpanded" IsExpandedChanged="@BuffysDiscordAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsBuffysDiscordExpanded" ExpandedChanged="@BuffysDiscordAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
@@ -89,10 +89,10 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsDiscordApiExpanded" IsExpandedChanged="@DiscordApiAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsDiscordApiExpanded" ExpandedChanged="@DiscordApiAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Filled.Api"/>
+                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.Api"/>
 
                                         <MudText>Discord Bot API</MudText>
                                     </div>
@@ -104,12 +104,12 @@
                         </MudExpansionPanels>
                     </MudExpansionPanel>
 
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET Core 3.1">
+                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET Core 3.1">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsAppUploaderExpanded" IsExpandedChanged="@AppUploaderChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsAppUploaderExpanded" ExpandedChanged="@AppUploaderChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Filled.Upload"/>
+                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.Upload"/>
 
                                         <MudText>Application Uploader</MudText>
                                     </div>
@@ -119,7 +119,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGtaMissionExpanded" IsExpandedChanged="@GtaMissionAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGtaMissionExpanded" ExpandedChanged="@GtaMissionAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
@@ -132,7 +132,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsEmailExpanded" IsExpandedChanged="@EmailSenderAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsEmailExpanded" ExpandedChanged="@EmailSenderAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/google.png" alt="google.png icon" />
@@ -147,9 +147,9 @@
                         </MudExpansionPanels>
                     </MudExpansionPanel>
 
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text=".NET Framework 4.7.2">
+                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET Framework 4.7.2">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsInlineSkatesManagerExpanded" IsExpandedChanged="@InlineSkatesManagerAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsInlineSkatesManagerExpanded" ExpandedChanged="@InlineSkatesManagerAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/ismicon.png" alt="ismicon.png icon" />
@@ -162,7 +162,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
 
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsBmNotifierExpanded" IsExpandedChanged="@BmNotifierAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsBmNotifierExpanded" ExpandedChanged="@BmNotifierAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon"/>
@@ -183,9 +183,9 @@
                 <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">TypeScript/JavaScript</MudText>
 
                 <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Style="font-weight: bold" IsInitiallyExpanded="true" Text="TypeScript">
+                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text="TypeScript">
                         <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsGameCpExpanded" IsExpandedChanged="@GameCpAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGameCpExpanded" ExpandedChanged="@GameCpAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
@@ -198,7 +198,7 @@
                                 </ChildContent>
                             </MudExpansionPanel>
                             
-                            <MudExpansionPanel Style="font-weight: normal" IsExpanded="@IsCokesBanExtExpanded" IsExpandedChanged="@CokesBanExtAppChanged">
+                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsCokesBanExtExpanded" ExpandedChanged="@CokesBanExtAppChanged">
                                 <TitleContent>
                                     <div class="d-flex align-center">
                                         <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />

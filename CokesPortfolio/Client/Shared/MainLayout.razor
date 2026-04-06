@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="ThemeManager.CurrentTheme"/>
+<MudThemeProvider @bind-IsDarkMode="@ThemeManager.IsDarkMode" />
+<MudPopoverProvider />
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
@@ -16,18 +17,18 @@
         <MudDivider Class="mx-4 my-3" FlexItem="true" Vertical="true"/>
 
         <MudTooltip Text="View my GitHub">
-            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/Coke21" Target="_blank" />
+            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/Coke21" Target="_blank" />
         </MudTooltip>
 
         <MudTooltip Text="View my LinkedIn">
-            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Link="https://www.linkedin.com/in/artur21" Target="_blank" />
+            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Inherit" Href="https://www.linkedin.com/in/artur21" Target="_blank" />
         </MudTooltip>
     </MudAppBar>
 
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader Class="d-flex justify-center align-center pa-1">
             <MudLink Class="d-flex align-center" Style="font-weight: bold" Href="/" Typo="Typo.h6">
-                 Artur's Portfolio <MudIcon Class="ml-1" Icon="@Icons.Filled.FolderShared" Size="Size.Large"/>
+                 Artur's Portfolio <MudIcon Class="ml-1" Icon="@Icons.Material.Filled.FolderShared" Size="Size.Large"/>
             </MudLink>
         </MudDrawerHeader>
 
@@ -41,23 +42,14 @@
     </MudMainContent>
 
     <MudScrollToTop>
-        <MudFab Color="Color.Primary" Icon="@Icons.Filled.KeyboardArrowUp"/>
+        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.KeyboardArrowUp"/>
     </MudScrollToTop>
 </MudLayout>
 
 @code {
     protected override async Task OnInitializedAsync()
     {
-        if (await LocalStorage.GetItemAsync<bool>("isDarkMode"))
-        {
-            ThemeManager.IsDefaultTheme = false;
-            ThemeManager.CurrentTheme = ThemeManager.DarkTheme;
-        }
-        else
-        {
-            ThemeManager.IsDefaultTheme = true;
-            ThemeManager.CurrentTheme = ThemeManager.DefaultTheme;
-        }
+        ThemeManager.IsDarkMode = await LocalStorage.GetItemAsync<bool>("isDarkMode");
     }
 
     bool _drawerOpen = true;
@@ -65,17 +57,8 @@
 
     async Task SwitchMode()
     {
-        if (ThemeManager.CurrentTheme == ThemeManager.DefaultTheme)
-        {
-            ThemeManager.IsDefaultTheme = false;
-            ThemeManager.CurrentTheme = ThemeManager.DarkTheme;
-            await LocalStorage.SetItemAsync<bool>("isDarkMode", true);
-        }
-        else
-        {
-            ThemeManager.IsDefaultTheme = true;
-            ThemeManager.CurrentTheme = ThemeManager.DefaultTheme;
-            await LocalStorage.SetItemAsync<bool>("isDarkMode", false);
-        }
+        ThemeManager.IsDarkMode = !ThemeManager.IsDarkMode;
+
+        await LocalStorage.SetItemAsync<bool>("isDarkMode", ThemeManager.IsDarkMode);
     }
 }
