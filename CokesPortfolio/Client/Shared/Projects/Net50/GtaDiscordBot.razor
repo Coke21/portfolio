@@ -4,7 +4,7 @@
         Summary:
     </MudText>
 
-    <MudList>
+    <MudList T="string">
         <MudListItem>
             <strong>Application Type</strong>: Console Application
         </MudListItem>
@@ -27,7 +27,7 @@
 
         <MudDivider />
 
-        <MudListItem Text="Example commands:" InitiallyExpanded="true">
+        <MudListItem Text="Example commands:" Expanded="true">
             <NestedList>
                 <MudListItem Icon="@Icons.Material.Filled.StarRate">
                     !check SteamId -> this is the most used command; it checks ban status of a player in a number of different services; <MudLink Href="icons/check.png" Target="_blank">example</MudLink> (certain information was erased from the picture)
