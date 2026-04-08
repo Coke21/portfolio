@@ -1,59 +1,28 @@
 ﻿@page "/projectsv2"
-@using CokesPortfolio.Client.Utilities.ProjectCategories
-@using CokesPortfolio.Client.Utilities.ProjectItems
-
-
 <PageTitle>Projects v2 | Artur's Portfolio</PageTitle>
 
-@inject ProjectItem ProjectItem;
-@inject ProjectCategory ProjectCategory;
-
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.Large">
-    <MudChipSet @bind-SelectedValues="_selected" SelectionMode="SelectionMode.MultiSelection" CheckMark="_checkMark" Variant="Variant.Text" Color="Color.Default">
-        @foreach (var item in ProjectCategory.GetProjectCategoryModels())
+    <MudChipSet T="Category" 
+                SelectedValues="_selectedCategories" 
+                SelectedValuesChanged="OnSelectedChangedCategories"
+                SelectionMode="SelectionMode.MultiSelection" 
+                CheckMark="true" 
+                Variant="Variant.Text"
+                Color="Color.Default">
+        @foreach (var item in Categories.AllCategories)
         {
-            <MudChip Icon="@item.Icon" Value="@(item.EnumName)"/>
+            <MudChip Icon="@item.Icon" Value="@item">
+                @item.Name
+            </MudChip>
         }
-@*         <MudChip Icon="@Icons.Material.Filled.Apps" Value="@("All")" />
-        <MudChip Icon="@Icons.Material.Filled.Language" Value="@("Web")" />
-        <MudChip Icon="@Icons.Material.Filled.DesktopWindows" Value="@("Desktop")" />
-        <MudChip Icon="@Icons.Material.Filled.Extension" Value="@("Extensions")" />
-        <MudChip Icon="@Icons.Material.Filled.SmartToy" Value="@("Tools & Bots")" /> *@
     </MudChipSet>
 
-    <MudText Typo="Typo.h5" Style="font-weight: bold" Class="mb-4 mt-5">⭐ Featured Projects</MudText>
+    @if (FilteredProjects.Any(i => i.IsFeatured))
+    {
+        <MudText Typo="Typo.h5" Style="font-weight: bold" Class="mb-4 mt-5">⭐ Featured Projects</MudText>
+    }
 
     <MudGrid>
-@*         <MudItem xs="12" sm="6">
-            <MudCard>
-                <MudCardMedia Style="background-size: contain; background-position: center;" Image="icons/gavel.png" Height="100" />
-                <MudCardContent>
-                    <MudText Typo="Typo.h5">Old Paint</MudText>
-                    <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
-                    <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn more</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <MudItem xs="12" sm="6">
-            <MudCard>
-                <MudCardMedia Style="background-size: contain; background-position: center;" Image="icons/gavel.png" Height="100" />
-                <MudCardContent>
-                    <MudText Typo="Typo.h5">Old Paint</MudText>
-                    <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
-                    <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn more</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem> *@
-
         @foreach (var item in FilteredProjects)
         {
             <MudItem xs="12" sm="6">
@@ -71,22 +40,29 @@
                 </MudCard>
             </MudItem>
         }
-
     </MudGrid>
-
-
 </MudContainer>
 
 
 @code {
-    private bool _checkMark = true;
-    private IReadOnlyCollection<string> _selected = new List<string> { "All" };
+    private IReadOnlyCollection<Category> _selectedCategories = new List<Category>() { Categories.All };
 
-    private IEnumerable<IProjectItem> FilteredProjects =>
-        _selected.Contains("All")
-            ? ProjectItem.GetProjectItems()
-            : ProjectItem.GetProjectItems()
-                .Where(p => p.Categories
-                    .Select(c => c.ToString()) // enum → string
-                    .Any(c => _selected.Contains(c)));
+    private IEnumerable<IProject> FilteredProjects =>
+        _selectedCategories.Contains(Categories.All)
+            ? ProjectItem.AllProjects()
+            : ProjectItem.AllProjects()
+                .Where(p => p.Categories.Any(c => _selectedCategories.Contains(c)));
+
+    private void OnSelectedChangedCategories(IReadOnlyCollection<Category> values)
+    {
+        List<Category> selected = values.ToList();
+
+        if (selected.Contains(Categories.All) && selected.Count > 1)
+            selected = new() { Categories.All };
+
+        if (!selected.Any())
+            selected = new() { Categories.All };
+
+        _selectedCategories = selected;
+    }
 }

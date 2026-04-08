@@ -1,8 +1,7 @@
 using Blazor.Analytics;
 using Blazored.LocalStorage;
 using CokesPortfolio.Client.Utilities;
-using CokesPortfolio.Client.Utilities.ProjectCategories;
-using CokesPortfolio.Client.Utilities.ProjectItems;
+using CokesPortfolio.Client.Utilities.PageProjects;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -19,9 +18,7 @@ namespace CokesPortfolio.Client
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddSingleton<ThemeManager>();
-            builder.Services.AddScoped<ProjectItem>();
-            builder.Services.AddScoped<ProjectCategory>();
-
+            builder.Services.AddScoped<Projects>();
 
             builder.Services.AddMudServices();
             builder.Services.AddBlazoredLocalStorage();
