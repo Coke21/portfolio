@@ -6,6 +6,6 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Category> Categories { get; set; }
-        public bool IsFeatured { get; set; }
+        public Card Card { get; set; }
     }
 }

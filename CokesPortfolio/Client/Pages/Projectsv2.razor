@@ -2,66 +2,127 @@
 <PageTitle>Projects v2 | Artur's Portfolio</PageTitle>
 
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.Large">
-    <MudChipSet T="Category" 
+    <MudChipSet T="CategoryDefinition" 
                 SelectedValues="_selectedCategories" 
                 SelectedValuesChanged="OnSelectedChangedCategories"
                 SelectionMode="SelectionMode.MultiSelection" 
-                CheckMark="true" 
-                Variant="Variant.Text"
-                Color="Color.Default">
-        @foreach (var item in Categories.AllCategories)
+                CheckMark="true">
+        @foreach (var item in Categories.AllCategoryDefinitions)
         {
-            <MudChip Icon="@item.Icon" Value="@item">
-                @item.Name
+            <MudChip Icon="@item.Category.Icon" Value="@item" Variant="Variant.Outlined" Color="Color.Dark">
+                @item.Category.Name
             </MudChip>
         }
     </MudChipSet>
 
-    @if (FilteredProjects.Any(i => i.IsFeatured))
+    @foreach (var group in FilteredProjectsGrouped)
     {
-        <MudText Typo="Typo.h5" Style="font-weight: bold" Class="mb-4 mt-5">⭐ Featured Projects</MudText>
-    }
+        <MudText Typo="@group.Key.Header.Typo" Class="@group.Key.Header.Class" Style="@group.Key.Header.Style">
+            <MudIcon Icon="@group.Key.Header.Icon" Color="@group.Key.Header.IconColor" Class="mr-2" /> @group.Key.Header.Name
+        </MudText>
 
-    <MudGrid>
-        @foreach (var item in FilteredProjects)
-        {
-            <MudItem xs="12" sm="6">
-                <MudCard>
-                    <MudCardMedia Style="background-size: contain; background-position: center;" Image="icons/gavel.png" Height="100" />
-                    <MudCardContent>
-                        <MudText Typo="Typo.h5">@item.Description</MudText>
-                        <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
-                        <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
-                    </MudCardContent>
-                    <MudCardActions>
-                        <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
-                        <MudButton Variant="Variant.Text" Color="Color.Primary">Learn more</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-        }
-    </MudGrid>
+        <MudGrid>
+            @foreach (var project in group)
+            {
+                <MudItem xs="12" sm="6" md="4" Class="@group.Key.Header.ChildClass">
+                    <MudCard Class="project-card">
+
+                        <MudCardMedia Image="@project.Card.CardMedia.Image" Style="@project.Card.CardMedia.Style" />
+
+                        <MudCardContent>
+
+                            <MudText Typo="Typo.h6" GutterBottom="true">
+                                @project.Card.Title
+                            </MudText>
+
+                            <MudStack Row="true" Spacing="1" Class="mb-3">
+                                @foreach (var chip in project.Card.CardChip)
+                                {
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@chip.Text</MudChip>
+                                }
+                            </MudStack>
+
+                            <MudText Typo="Typo.body2" Class="mb-4">
+                                @project.Card.Description
+                            </MudText>
+
+                        </MudCardContent>
+
+                        <MudCardActions Class="px-4 pb-4">
+
+                            @if (project.Card.IsLiveAppAvailable)
+                            {
+                                <MudButton Variant="Variant.Filled"
+                                           Color="Color.Primary"
+                                           StartIcon="@Icons.Material.Filled.Launch">
+                                    Live Demo
+                                </MudButton>
+                            }
+
+                            <MudSpacer />
+
+                            <MudButton Variant="Variant.Outlined"
+                                       Color="Color.Default">
+                                Details
+                            </MudButton>
+
+                        </MudCardActions>
+
+                    </MudCard>
+                </MudItem>
+
+@*                 <MudItem xs="12" sm="6" md="4" Class="@group.Key.Header.ChildClass">
+                    <MudCard>
+                        <MudCardMedia Style="background-size: contain; background-position: center;" Image="icons/gavel.png" Height="100" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h5">@project.Description</MudText>
+                            <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
+                            <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary">Learn more</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem> *@
+            }
+        </MudGrid>
+    }
 </MudContainer>
 
 
 @code {
-    private IReadOnlyCollection<Category> _selectedCategories = new List<Category>() { Categories.All };
+    private IReadOnlyCollection<CategoryDefinition> _selectedCategories = new List<CategoryDefinition>() { Categories.AllDefinition };
 
     private IEnumerable<IProject> FilteredProjects =>
-        _selectedCategories.Contains(Categories.All)
+        _selectedCategories.Contains(Categories.AllDefinition)
             ? ProjectItem.AllProjects()
             : ProjectItem.AllProjects()
-                .Where(p => p.Categories.Any(c => _selectedCategories.Contains(c)));
+                .Where(p => p.Categories.Any(c => _selectedCategories.Contains(Categories.AllCategoryDefinitions.First(x => x.Category == c))));
 
-    private void OnSelectedChangedCategories(IReadOnlyCollection<Category> values)
+    private IEnumerable<IGrouping<CategoryDefinition, IProject>> FilteredProjectsGrouped =>
+        FilteredProjects
+            .SelectMany(project =>
+                project.Categories.Select(category =>
+                    new
+                    {
+                        CategoryDefinition = Categories.AllCategoryDefinitions
+                            .First(x => x.Category == category),
+
+                        Project = project
+                    }))
+            .GroupBy(x => x.CategoryDefinition, x => x.Project)
+            .OrderBy(g => g.Key.Category.Order);
+
+    private void OnSelectedChangedCategories(IReadOnlyCollection<CategoryDefinition> values)
     {
-        List<Category> selected = values.ToList();
+        List<CategoryDefinition> selected = values.ToList();
 
-        if (selected.Contains(Categories.All) && selected.Count > 1)
-            selected = new() { Categories.All };
+        if (selected.Contains(Categories.AllDefinition) && selected.Count > 1)
+            selected = new() { Categories.AllDefinition };
 
         if (!selected.Any())
-            selected = new() { Categories.All };
+            selected = new() { Categories.AllDefinition };
 
         _selectedCategories = selected;
     }
