@@ -5,5 +5,9 @@
         string Description,
         CardMedia CardMedia,
         List<CardChip> CardChip,
-        bool IsLiveAppAvailable);
+        bool IsLiveAppAvailable,
+        string LiveAppHref,
+        bool DetailsAvailable,
+        bool IsSourceCodeAvailable,
+        string SourceCodeHref);
 }
