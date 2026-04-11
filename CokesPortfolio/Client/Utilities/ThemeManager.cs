@@ -18,6 +18,17 @@ namespace CokesPortfolio.Client.Utilities
             }
         }
 
+        public MudTheme MudTheme = new MudTheme()
+        {
+            PaletteLight = new PaletteLight()
+            {
+                Background = "#f1f1f8",
+                DrawerBackground = "#f1f1f8"
+            }
+        };
+
+
+
         //public MudTheme Theme { get; } = new MudTheme()
         //{
         //    PaletteLight = new PaletteLight()
@@ -48,8 +59,5 @@ namespace CokesPortfolio.Client.Utilities
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        // Optional helper to toggle dark mode
-        public void ToggleDarkMode() => IsDarkMode = !IsDarkMode;
     }
 }

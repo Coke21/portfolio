@@ -115,5 +115,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 .Select(f => (CategoryDefinition)f.GetValue(null)!)
                 .OrderBy(c => c.Category.Order)
                 .ToList();
+
+        public static IReadOnlyCollection<CategoryDefinition> SelectedCategories = new List<CategoryDefinition>() { Categories.AllDefinition };
     }
 }
