@@ -24,8 +24,9 @@
         <MudGrid Spacing="6">
             @foreach (var project in group)
             {
+                @* Set MudItem d-flex so the children will stretch to the same height as the tallest item in the row *@
                 <MudItem xs="12" sm="6" md="2" Class="@($"d-flex {group.Key.Header.ChildClass}")">
-                    <MudCard Class="h-100; project-card" Style="width: 100%;">
+                    <MudCard Class="project-card">
 
                         <MudCardMedia Image="@project.Card.CardMedia.Image" Class="ma-2" Style="@project.Card.CardMedia.Style" />
 
