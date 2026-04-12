@@ -2,30 +2,31 @@
 <PageTitle>Projects v2 | Artur's Portfolio</PageTitle>
 
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.False">
-    <MudChipSet T="CategoryDefinition" 
-                SelectedValues="Categories.SelectedCategories" 
+    <MudChipSet T="Category" 
+                SelectedValues="SelectedCategories"
                 SelectedValuesChanged="OnSelectedChangedCategories"
                 SelectionMode="SelectionMode.MultiSelection" 
                 CheckMark="true">
-        @foreach (var item in Categories.AllCategoryDefinitions)
+        @foreach (var item in CategoryService.Categories)
         {
-            <MudChip Icon="@item.Category.Icon" Value="@item" Variant="Variant.Outlined" Color="Color.Default">
-                @item.Category.Name
+            <MudChip Icon="@item.Icon" Value="@item" Variant="Variant.Outlined" Color="Color.Default">
+                @item.DisplayName
             </MudChip>
         }
     </MudChipSet>
 
-    @foreach (var group in ProjectItem.FilteredProjectsGrouped)
+    @foreach (var group in ProjectViewModel.FilteredProjectsGrouped)
     {
-        <MudText Typo="@group.Key.Header.Typo" Class="@group.Key.Header.Class" Style="@group.Key.Header.Style">
-            <MudIcon Icon="@group.Key.Header.Icon" Color="@group.Key.Header.IconColor" Class="mr-2" /> @group.Key.Header.Name
+        <MudText Typo="@group.Key.Typo" Class="@group.Key.Class" Style="@group.Key.Style">
+            <MudIcon Icon="@group.Key.HeaderIcon" Color="@group.Key.IconColor" Class="mr-2"/> 
+                @group.Key.HeaderName
         </MudText>
 
         <MudGrid Spacing="6">
             @foreach (var project in group)
             {
                 @* Set MudItem d-flex so the children will stretch to the same height as the tallest item in the row *@
-                <MudItem xs="12" sm="6" md="2" Class="@($"d-flex mt-4 {group.Key.Header.ChildClass}")">
+                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" Class="@($"mt-4 d-flex {group.Key.ChildClass}")">
                     <MudCard Class="project-card">
 
                         <MudCardMedia Image="@project.Card.CardMedia.Image" Class="ma-2" Style="@project.Card.CardMedia.Style" />
@@ -92,17 +93,21 @@
 </MudContainer>
 
 
-@code {
-    private void OnSelectedChangedCategories(IReadOnlyCollection<CategoryDefinition> values)
+    @code {
+    private IReadOnlyCollection<Category> SelectedCategories
     {
-        List<CategoryDefinition> selected = values.ToList();
+        get => CategoryService.Categories
+            .Where(c => ProjectViewModel.SelectedCategoryIds.Contains(c.Id))
+            .ToList();
+    }
 
-        if (selected.Contains(Categories.AllDefinition) && selected.Count > 1)
-            selected = new() { Categories.AllDefinition };
+    private void OnSelectedChangedCategories(IReadOnlyCollection<Category> values)
+    {
+        var ids = values.Select(x => x.Id).ToList();
 
-        if (!selected.Any())
-            selected = new() { Categories.AllDefinition };
+        if (ids.Contains(1) || ids.Count == 0)
+            ids = new List<int> { CategoryService.Categories.First(c => c.SelectedByDefault).Id };
 
-        Categories.SelectedCategories = selected;
+        ProjectViewModel.SelectedCategoryIds = ids;
     }
 }

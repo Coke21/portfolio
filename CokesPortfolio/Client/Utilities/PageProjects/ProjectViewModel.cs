@@ -1,16 +1,48 @@
 ﻿
 namespace CokesPortfolio.Client.Utilities.PageProjects
 {
-    public class Projects
+    public class ProjectViewModel
     {
-        public List<IProject> AllProjects()
+        private ICategoryService _categoryService;
+
+        public ProjectViewModel(ICategoryService categoryService)
         {
-            var items = new List<IProject>()
+            _categoryService = categoryService;
+
+            SelectedCategoryIds = 
+            [
+                _categoryService.Categories.First(c => c.SelectedByDefault).Id
+            ];
+        }
+
+        public List<int> SelectedCategoryIds;
+
+        public IEnumerable<Project> FilteredProjects =>
+            SelectedCategoryIds.Contains(1)
+                ? AllProjects()
+                : AllProjects()
+                    .Where(p => p.IdCategoryList
+                        .Any(c => SelectedCategoryIds.Contains(c)));
+        public IEnumerable<IGrouping<Category, Project>> FilteredProjectsGrouped =>
+            FilteredProjects
+                .SelectMany(project =>
+                    project.IdCategoryList.Select(idCategory => new
+                    {
+                        Category = _categoryService.GetById(idCategory),
+                        Project = project
+                    }))
+                .OrderBy(x => x.Project.Order)
+                .GroupBy(x => x.Category, x => x.Project)
+                .OrderBy(g => g.Key.Order);
+
+        public List<Project> AllProjects()
+        {
+            var items = new List<Project>()
             {
                 new Project()
                 {
                     Name = "Coke's Ban Checker",
-                    Categories = new List<Category> { Categories.FeaturedDefinition.Category, Categories.WebDefinition.Category },
+                    IdCategoryList = new List<int>() { 2, 3 },
                     Card = new Card(
                         Title: "Coke's Ban Checker",
                         Description: "Online tool for verifying ArmA 3 and Steam ban status. " +
@@ -43,7 +75,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Coke's Portfolio",
-                    Categories = new List<Category> { Categories.WebDefinition.Category },
+                    IdCategoryList = new List<int> { 3 },
                     Card = new Card(
                         Title: "Coke's Portfolio",
                         Description: "A portfolio website built with Blazor WebAssembly, showcasing my projects and skills.",
@@ -66,7 +98,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "GTA Mission Downloader",
-                    Categories = new List<Category> { Categories.DesktopDefinition.Category },
+                    IdCategoryList = new List<int> { 4 },
                     Card = new Card(
                         Title: "GTA Mission Downloader",
                         Description: "WPF desktop application for downloading and managing ArmA 3 mission files. " +
@@ -76,7 +108,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                         CardChip: new List<CardChip> {
                             new CardChip(".NET Core 3.1"),
                             new CardChip("WPF"), 
-                            new CardChip("MVVM (Caliburn.Micro library)"),
+                            new CardChip("MVVM (Caliburn.Micro)"),
                             new CardChip("MahApps.Metro UI")
                         },
                         IsLiveAppAvailable: false,
@@ -91,7 +123,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Inline Skates Manager",
-                    Categories = new List<Category> { Categories.DesktopDefinition.Category },
+                    IdCategoryList = new List<int> { 4 },
                     Card = new Card(
                         Title: "Inline Skates Manager",
                         Description: "Inventory and rental management for inline skates with Microsoft SQL Server as database.",
@@ -114,7 +146,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Variable Patcher",
-                    Categories = new List<Category> { Categories.DesktopDefinition.Category },
+                    IdCategoryList = new List<int> { 4 },
                     Card = new Card(
                         Title: "Variable Patcher",
                         Description: "Variable Patcher is a utility that updates variables in .sqf files using values from .txt files. " +
@@ -124,7 +156,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                         CardChip: new List<CardChip> {
                             new CardChip(".NET 6"),
                             new CardChip("WPF"),
-                            new CardChip("MVVM (Stylet library)"),
+                            new CardChip("MVVM (Stylet)"),
                             new CardChip("MaterialDesignInXAML UI")
                         },
                         IsLiveAppAvailable: false,
@@ -139,7 +171,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "E-Mail Sender",
-                    Categories = new List<Category> { Categories.DesktopDefinition.Category },
+                    IdCategoryList = new List<int> { 4 },
                     Card = new Card(
                         Title: "E-Mail Sender",
                         Description: "WPF (MVVM) app using Google Drive & Gmail APIs to upload files, make them public, and send e-mails with shareable links. " +
@@ -148,7 +180,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                         CardChip: new List<CardChip> {
                             new CardChip(".NET Core 3.1"),
                             new CardChip("WPF"),
-                            new CardChip("MVVM (Caliburn.Micro library)"),
+                            new CardChip("MVVM (Caliburn.Micro)"),
                             new CardChip("Google API"),
                             new CardChip("ModernWpfUI")
                         },
@@ -164,7 +196,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Forum Application Uploader",
-                    Categories = new List<Category> { Categories.DesktopDefinition.Category },
+                    IdCategoryList = new List<int> { 4 },
                     Card = new Card(
                         Title: "Forum Application Uploader",
                         Description: "WPF (MVVM) tool that reads forum applications, extracts data, and uploads it to Google Sheets. Reduced manual processing time from ~30 minutes to ~1 minute.",
@@ -173,7 +205,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                         {
                             new CardChip(".NET Core 3.1"),
                             new CardChip("WPF"),
-                            new CardChip("MVVM (Caliburn.Micro library)"),
+                            new CardChip("MVVM (Caliburn.Micro)"),
                             new CardChip("Automation"),
                             new CardChip("Google API"),
                         },
@@ -189,7 +221,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "GTA Discord Bot",
-                    Categories = new List<Category> { Categories.ToolsBotsDefinition.Category },
+                    IdCategoryList = new List<int> { 5 },
                     Card = new Card(
                         Title: "GTA Discord Bot",
                         Description: "Console Discord bot (Discord.NET) formerly used in GTA Discord servers (ArmA 3 game) to quickly check player status (ban checks) across multiple services." +
@@ -212,7 +244,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Buffy's Discord Bot",
-                    Categories = new List<Category> { Categories.ToolsBotsDefinition.Category },
+                    IdCategoryList = new List<int> { 5 },
                     Card = new Card(
                         Title: "Buffy's Discord Bot",
                         Description: "Console Discord bot (Discord.NET) formerly hosted on Heroku that listened to embed messages, extracted data, and synced it to Google Sheets. Used PostgreSQL with EF Core for configuration and command management.",
@@ -236,7 +268,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 new Project()
                 {
                     Name = "Coke's Ban Checker Extension",
-                    Categories = new List<Category> { Categories.ExtensionsDefinition.Category },
+                    IdCategoryList = new List<int> { 6 },
                     Card = new Card(
                         Title: "Coke's Ban Checker Extension",
                         Description: "Chrome extension (TypeScript) that enhances supported websites with additional UI and allows quick BattlEye Global ban checks via Coke's Ban Checker API (Featured App: Coke's Ban Checker). Used by over 30 users.",
@@ -259,26 +291,5 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
 
             return items;
         }
-
-        public IEnumerable<IProject> FilteredProjects =>
-            Categories.SelectedCategories.Contains(Categories.AllDefinition)
-                ? AllProjects()
-                : AllProjects()
-                    .Where(p => p.Categories.Any(c => Categories.SelectedCategories.Contains(Categories.AllCategoryDefinitions.First(x => x.Category == c))));
-
-        public IEnumerable<IGrouping<CategoryDefinition, IProject>> FilteredProjectsGrouped =>
-            FilteredProjects
-                .SelectMany(project =>
-                    project.Categories.Select(category =>
-                        new
-                        {
-                            CategoryDefinition = Categories.AllCategoryDefinitions
-                                .First(x => x.Category == category),
-
-                            Project = project
-                        }))
-                .OrderBy(x => x.Project.Order)
-                .GroupBy(x => x.CategoryDefinition, x => x.Project)
-                .OrderBy(g => g.Key.Category.Order);
     }
 }

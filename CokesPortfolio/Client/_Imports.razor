@@ -21,8 +21,8 @@
 @using CokesPortfolio.Client.Utilities.PageProjects
 @using MudBlazor
 
-
+@inject ICategoryService CategoryService;
 @inject HttpClient HttpClient
 @inject ThemeManager ThemeManager
 @inject ILocalStorageService LocalStorage
-@inject Utilities.PageProjects.Projects ProjectItem;
+@inject Utilities.PageProjects.ProjectViewModel ProjectViewModel;
