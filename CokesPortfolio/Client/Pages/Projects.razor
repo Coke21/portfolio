@@ -1,381 +1,113 @@
 ﻿@page "/projects"
 <PageTitle>Projects | Artur's Portfolio</PageTitle>
 
-<MudContainer Class="mt-16 mb-16" MaxWidth="MaxWidth.ExtraLarge">
-    <MudPaper Class="pa-6" Elevation="5">
-        <MudContainer Class="d-flex" MaxWidth="MaxWidth.ExtraLarge">
-            <MudAvatar Class="mud-elevation-25 mt-2">
-                <MudIcon Icon="@Icons.Material.Filled.Apps" />
-            </MudAvatar>
+<MudContainer Class="mt-8" MaxWidth="MaxWidth.False">
+    <MudChipSet T="Category" 
+                SelectedValues="SelectedCategories"
+                SelectedValuesChanged="OnSelectedChangedCategories"
+                SelectionMode="SelectionMode.MultiSelection" 
+                CheckMark="true">
+        @foreach (Category category in CategoryService.Categories)
+        {
+            <MudChip Icon="@category.Icon" Value="@category" Variant="Variant.Outlined" Color="Color.Default">
+                @category.DisplayName
+            </MudChip>
+        }
+    </MudChipSet>
 
-            <MudText Class="ml-2" Style="font-weight: bold" Typo="Typo.h3" GutterBottom="true">Projects</MudText>
-        </MudContainer>
+    @foreach (IGrouping<Category, Project> groupProjects in ProjectViewModel.FilteredProjectsGrouped)
+    {
+        <MudText Typo="@groupProjects.Key.Typo" Class="@groupProjects.Key.Class" Style="@groupProjects.Key.Style">
+            <MudIcon Icon="@groupProjects.Key.HeaderIcon" Color="@groupProjects.Key.IconColor" Class="mr-2"/> 
+                @groupProjects.Key.HeaderName
+        </MudText>
 
-        <MudText Typo="Typo.body1" GutterBottom="true">This page shows programs that I have created. The contents are divided into separate programming languages and appropriate frameworks.</MudText>
+        <MudGrid Spacing="6">
+            @foreach (Project project in groupProjects)
+            {
+                @* Set MudItem d-flex so the children will stretch to the same height as the tallest item in the row *@
+                <MudItem xs="12" sm="6" md="4" lg="3" xl="2" Class="@($"mt-4 d-flex {groupProjects.Key.ChildClass}")">
+                    <MudCard Class="project-card">
 
-        <MudGrid>
-            <MudItem xs="12">
-                <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">C#</MudText>
+                        <MudCardMedia Image="@project.Card.CardMedia.Image" Class="ma-2" Style="@project.Card.CardMedia.Style" />
 
-                <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET 6.0">
-                        <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsArturExpanded" ExpandedChanged="@ArturAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/folderopen.png" alt="folderopen.png icon" />
+                        <MudCardContent>
 
-                                        <MudText>Artur's Portfolio</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <ArtursPortfolio/>
-                                </ChildContent>
-                            </MudExpansionPanel>
+                            <MudText Typo="Typo.h6" GutterBottom="true">
+                                @project.Card.Title
+                            </MudText>
 
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsVariablePatcherExpanded" ExpandedChanged="@VariablePatcherAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.AutoFixHigh"/>
+                            <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1" Class="mb-3">
+                                @foreach (var chip in project.Card.CardChip)
+                                {
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@chip.Text</MudChip>
+                                }
+                            </MudStack>
 
-                                        <MudText>Variable Patcher</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <VariablePatcher/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                        </MudExpansionPanels>
-                    </MudExpansionPanel>
+                            <MudText Typo="Typo.body2" Class="mb-4" Style="white-space: pre-line;">
+                                @project.Card.Description
+                            </MudText>
 
-                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET 5.0">
-                        <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGtaDiscordExpanded" ExpandedChanged="@GtaDiscordAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
+                        </MudCardContent>
 
-                                        <MudText>GTA Discord Bot</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <GtaDiscordBot/>
-                                </ChildContent>
-                            </MudExpansionPanel>
+                        <MudCardActions Class="px-4 pb-4">
 
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsCokeBanExpanded" ExpandedChanged="@CokeBanAppExpanded">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
+                            @if (project.Card.IsLiveAppAvailable)
+                            {
+                                <MudButton Variant="Variant.Filled"
+                                           Color="Color.Primary"
+                                           StartIcon="@Icons.Material.Filled.Launch"
+                                           Href="@project.Card.LiveAppHref"
+                                           Target="_blank">
+                                    Live Demo
+                                </MudButton>
+                            }
 
-                                        <MudText>Coke's Ban Checker</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <CokesBanChecker/>
-                                </ChildContent>
-                            </MudExpansionPanel>
+                            <MudSpacer />
 
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsBuffysDiscordExpanded" ExpandedChanged="@BuffysDiscordAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/discordbot.png" alt="discordbot.png icon" />
+                            @if (project.Card.IsSourceCodeAvailable)
+                            {
+                                <MudButton Variant="Variant.Outlined"
+                                           Color="Color.Default"
+                                           StartIcon="@Icons.Material.Filled.Code"
+                                           Href="@project.Card.SourceCodeHref"
+                                           Target="_blank">
+                                    Source Code
+                                </MudButton>
+                            }
 
-                                        <MudText>Buffy's Discord Bot</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <BuffysDiscordBot/>
-                                </ChildContent>
-                            </MudExpansionPanel>
+                            @if (project.Card.DetailsAvailable)
+                            {
+                                <MudButton Variant="Variant.Outlined"
+                                           Color="Color.Default">
+                                    Details
+                                </MudButton>
+                            }
+                        </MudCardActions>
 
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsDiscordApiExpanded" ExpandedChanged="@DiscordApiAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.Api"/>
-
-                                        <MudText>Discord Bot API</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <DiscordBotApi/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                        </MudExpansionPanels>
-                    </MudExpansionPanel>
-
-                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET Core 3.1">
-                        <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsAppUploaderExpanded" ExpandedChanged="@AppUploaderChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.Upload"/>
-
-                                        <MudText>Application Uploader</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <ApplicationUploader/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGtaMissionExpanded" ExpandedChanged="@GtaMissionAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
-
-                                        <MudText>GTA Mission Downloader</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <GtaMissionDownloader/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsEmailExpanded" ExpandedChanged="@EmailSenderAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/google.png" alt="google.png icon" />
-
-                                        <MudText>E-Mail Sender</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <EMailSender/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                        </MudExpansionPanels>
-                    </MudExpansionPanel>
-
-                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text=".NET Framework 4.7.2">
-                        <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsInlineSkatesManagerExpanded" ExpandedChanged="@InlineSkatesManagerAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/ismicon.png" alt="ismicon.png icon" />
-
-                                        <MudText>Inline Skates Manager</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <InlineSkatesManager/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsBmNotifierExpanded" ExpandedChanged="@BmNotifierAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/bm.png" alt="bm.png icon"/>
-
-                                        <MudText>BattleMetrics Notifier</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <BattleMetricsNotifier/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                        </MudExpansionPanels>
-                    </MudExpansionPanel>
-                </MudExpansionPanels>
-            </MudItem>
-
-            <MudItem xs="12">
-                <MudText Style="font-weight: bold" Typo="Typo.h4" Align="Align.Center" GutterBottom="true">TypeScript/JavaScript</MudText>
-
-                <MudExpansionPanels MultiExpansion="true">
-                    <MudExpansionPanel Style="font-weight: bold" Expanded="true" Text="TypeScript">
-                        <MudExpansionPanels MultiExpansion="true">
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsGameCpExpanded" ExpandedChanged="@GameCpAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gtaicon.png" alt="gtaicon.png icon" />
-
-                                        <MudText>GameCP-Shortcut</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <GameCpShortcut/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                            
-                            <MudExpansionPanel Style="font-weight: normal" Expanded="@IsCokesBanExtExpanded" ExpandedChanged="@CokesBanExtAppChanged">
-                                <TitleContent>
-                                    <div class="d-flex align-center">
-                                        <img style="height: 20px; width: 20px; vertical-align: top; margin-right: 5px;" src="icons/gavel.png" alt="gavel.png icon" />
-
-                                        <MudText>Coke's Ban Checker Extension</MudText>
-                                    </div>
-                                </TitleContent>
-                                <ChildContent>
-                                    <CokesBanCheckerExtension/>
-                                </ChildContent>
-                            </MudExpansionPanel>
-                        </MudExpansionPanels>
-                    </MudExpansionPanel>
-                </MudExpansionPanels>
-            </MudItem>
+                    </MudCard>
+                </MudItem>
+            }
         </MudGrid>
-    </MudPaper>
+    }
 </MudContainer>
 
-@code {
-    ProjectsModel ProjectsModel { get; set; }
-    protected override async Task OnInitializedAsync()
-    {
-        var model = await LocalStorage.GetItemAsync<ProjectsModel>("Projects");
-        if (model is null)
-        {
-            model = new ProjectsModel();
-            ProjectsModel = model;
-            await LocalStorage.SetItemAsync("Projects", model);
-        } 
-        else
-        {
-            ProjectsModel = model;
 
-            IsArturExpanded = model.IsArturExpanded;
-            IsVariablePatcherExpanded = model.IsVariablePatcherExpanded;
-            IsGtaDiscordExpanded = model.IsGtaDiscordExpanded;
-            IsCokeBanExpanded = model.IsCokeBanExpanded;
-            IsBuffysDiscordExpanded = model.IsBuffysDiscordExpanded;
-            IsDiscordApiExpanded = model.IsDiscordApiExpanded;
-            IsAppUploaderExpanded = model.IsAppUploaderExpanded;
-            IsGtaMissionExpanded = model.IsGtaMissionExpanded;
-            IsEmailExpanded = model.IsEmailExpanded;
-            IsInlineSkatesManagerExpanded = model.IsInlineSkatesManagerExpanded;
-            IsBmNotifierExpanded = model.IsBmNotifierExpanded;
-            IsGameCpExpanded = model.IsGameCpExpanded;
-            IsCokesBanExtExpanded = model.IsCokesBanExtExpanded;
-        }
+    @code {
+    private IReadOnlyCollection<Category> SelectedCategories
+    {
+        get => CategoryService.Categories
+            .Where(c => ProjectViewModel.SelectedCategoryIds.Contains(c.Id))
+            .ToList();
     }
 
-    bool IsArturExpanded { get; set; }
-    async Task ArturAppChanged(bool isChecked)
+    private void OnSelectedChangedCategories(IReadOnlyCollection<Category> values)
     {
-        if (ProjectsModel.IsArturExpanded == isChecked)
-            return;
-            
-        ProjectsModel.IsArturExpanded = IsArturExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
+        List<int> ids = values.Select(x => x.Id).ToList();
 
-    bool IsVariablePatcherExpanded { get; set; }
-    async Task VariablePatcherAppChanged(bool isChecked)
-    {
-        if (ProjectsModel.IsVariablePatcherExpanded == isChecked)
-            return;
-            
-        ProjectsModel.IsVariablePatcherExpanded = IsVariablePatcherExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
+        if (ids.Contains(1) || ids.Count == 0)
+            ids = new List<int> { CategoryService.Categories.First(c => c.SelectedByDefault).Id };
 
-    bool IsGtaDiscordExpanded { get; set; }
-    async Task GtaDiscordAppChanged(bool isChecked)
-    {
-        if (ProjectsModel.IsGtaDiscordExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsGtaDiscordExpanded = IsGtaDiscordExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsCokeBanExpanded { get; set; }
-    async Task CokeBanAppExpanded(bool isChecked)
-    {
-        if (ProjectsModel.IsCokeBanExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsCokeBanExpanded = IsCokeBanExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsBuffysDiscordExpanded {  get;  set; }
-    async Task BuffysDiscordAppChanged(bool isChecked)
-    {
-        if (ProjectsModel.IsBuffysDiscordExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsBuffysDiscordExpanded = IsBuffysDiscordExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsDiscordApiExpanded { get; set; }
-    async Task DiscordApiAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsDiscordApiExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsDiscordApiExpanded = IsDiscordApiExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsAppUploaderExpanded { get; set; }
-    async Task AppUploaderChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsAppUploaderExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsAppUploaderExpanded = IsAppUploaderExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsGtaMissionExpanded { get; set; }
-    async Task GtaMissionAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsGtaMissionExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsGtaMissionExpanded = IsGtaMissionExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsEmailExpanded { get; set; }
-    async Task EmailSenderAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsEmailExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsEmailExpanded = IsEmailExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsInlineSkatesManagerExpanded { get; set; }
-    async Task InlineSkatesManagerAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsInlineSkatesManagerExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsInlineSkatesManagerExpanded = IsInlineSkatesManagerExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsBmNotifierExpanded { get; set; }
-    async Task BmNotifierAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsBmNotifierExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsBmNotifierExpanded = IsBmNotifierExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsGameCpExpanded { get; set; }
-    async Task GameCpAppChanged(bool isChecked) 
-    {
-        if (ProjectsModel.IsGameCpExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsGameCpExpanded = IsGameCpExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
-    }
-
-    bool IsCokesBanExtExpanded { get; set; }
-    async Task CokesBanExtAppChanged(bool isChecked)
-    {
-        if (ProjectsModel.IsCokesBanExtExpanded == isChecked)
-            return;
-
-        ProjectsModel.IsCokesBanExtExpanded = IsCokesBanExtExpanded = isChecked;
-        await LocalStorage.SetItemAsync("Projects", ProjectsModel);
+        ProjectViewModel.SelectedCategoryIds = ids;
     }
 }
