@@ -1,12 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider @bind-IsDarkMode="@ThemeManager.IsDarkMode" />
+<MudThemeProvider Theme="ThemeManager.MudTheme" @bind-IsDarkMode="@ThemeManager.IsDarkMode" />
 <MudPopoverProvider />
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
-    <MudAppBar Elevation="1" Dense="true">
+    <MudAppBar Style="@GetAppBarStyle()" Elevation="1" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
 
         <MudSpacer />
@@ -28,7 +28,7 @@
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader Class="d-flex justify-center align-center pa-1">
             <MudLink Class="d-flex align-center" Style="font-weight: bold" Href="/" Typo="Typo.h6">
-                 Artur's Portfolio <MudIcon Class="ml-1" Icon="@Icons.Material.Filled.FolderShared" Size="Size.Large"/>
+                 Artur's Portfolio
             </MudLink>
         </MudDrawerHeader>
 
@@ -36,7 +36,7 @@
     </MudDrawer>
 
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+        <MudContainer MaxWidth="MaxWidth.False">
             @Body
         </MudContainer>
     </MudMainContent>
@@ -60,5 +60,15 @@
         ThemeManager.IsDarkMode = !ThemeManager.IsDarkMode;
 
         await LocalStorage.SetItemAsync<bool>("isDarkMode", ThemeManager.IsDarkMode);
+    }
+
+    private string GetAppBarStyle()
+    {
+        if (ThemeManager.IsDarkMode)
+        {
+            return "background: #27272f; color: white;";
+        }
+
+        return "background: linear-gradient(90deg, #2b2d42 0%, #434863 100%); color: white;";
     }
 }

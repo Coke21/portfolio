@@ -17,12 +17,14 @@
 
     <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
     <script type="importmap"></script>
+
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="loading">
     <div id="app" />
 
-    <div style="position:absolute; top:30vh; width:100%; text-align:center">
+    <div style="position:absolute; top:30vh; width:100%; text-align:center;">
         <h1 style="font-size: 40px; font-weight: bold">Artur's Portfolio</h1>
         <p style="font-size: 30px">
             <i class="fas fa-spinner fa-pulse"></i> The portfolio is loading...
@@ -39,6 +41,12 @@
     <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
     <script src="_content/Blazor-Analytics/blazor-analytics.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.remove('loading');
+        });
+    </script>
 </body>
 
 </html>
