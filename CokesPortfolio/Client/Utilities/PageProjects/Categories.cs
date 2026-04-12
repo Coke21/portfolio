@@ -35,8 +35,8 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                 "Featured Projects",
                 Typo.h5,
                 "font-weight: bold",
-                "d-flex align-center mt-6 mb-2",
-                "mb-8")
+                "d-flex align-center mt-6",
+                "")
         };
 
         public static readonly CategoryDefinition WebDefinition = new()

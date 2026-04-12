@@ -120,7 +120,7 @@ namespace CokesPortfolio.Client.Utilities.PageProjects
                         Description: "Variable Patcher is a utility that updates variables in .sqf files using values from .txt files. " +
                                      "It automates the process of replacing configuration values, eliminating the need for manual editing and reducing repetitive work. " +
                                      "The application was created for a friend to streamline their workflow.",
-                        CardMedia: new CardMedia("icons/variablepatcher1.png", "background-size: contain; background-position: center;"),
+                        CardMedia: new CardMedia("icons/variablepatcher.png", "background-size: contain; background-position: center;"),
                         CardChip: new List<CardChip> {
                             new CardChip(".NET 6"),
                             new CardChip("WPF"),
