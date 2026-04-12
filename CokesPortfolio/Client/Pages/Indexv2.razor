@@ -1,0 +1,128 @@
+﻿@page "/v2"
+
+<PageTitle>Home | Artur's Portfolio</PageTitle>
+
+<MudContainer Class="mt-16 mb-16" MaxWidth="MaxWidth.Large">
+    <MudPaper Class="pa-8" Elevation="4" Style="border-radius: 16px;">
+        
+        @* Hero Section *@
+        <MudContainer Class="d-flex flex-column align-center mb-8">
+@*             <MudAvatar Style="height: 120px; width: 120px;" Class="mud-elevation-10 mb-4">
+                <MudIcon Icon="fas fa-laptop-code" Style="font-size: 3.5rem; margin-right: 12px" />
+            </MudAvatar> *@
+
+            <MudAvatar Style="height: 120px; width: 120px;" Class="mud-elevation-10 mb-4">
+                <MudImage Src="icons/artur.jpg" />
+            </MudAvatar>
+    
+            <MudText Typo="Typo.h3" Align="Align.Center"  Color="Color.Primary" Class="font-weight-bold" GutterBottom="true">
+                Hi, I'm Artur Idzikowski-Šakušić
+            </MudText>
+    
+            <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Primary">
+                .NET Software Engineer
+            </MudText>
+        </MudContainer>
+
+        <MudDivider Class="my-6" />
+
+        @* About me *@
+        <MudContainer Class="mb-8">
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="d-flex align-center font-weight-bold mb-4">
+                <MudIcon Icon="@Icons.Material.Filled.Person" Class="mr-2" /> About Me
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-4" Style="line-height: 1.8;">
+                I'm a passionate <b>.NET Software Engineer</b> based in Warsaw. With a Master of Arts in English Studies from the University of Warsaw, I combined my self-taught programming roots with a drive for continuous learning to build a professional career in IT.
+            </MudText>
+            <MudText Typo="Typo.body1" Style="line-height: 1.8;">
+                Since early 2022, I have been professionally developing and maintaining complex CRM, debt collection, billing, and invoicing applications. I thrive in a SCRUM environment where I can act as a versatile developer—handling everything from requirement gathering and architectural design to implementation, code reviews, and post-deployment support. Whether it's crafting scalable backends or mentoring team members, I focus on delivering high-quality, business-driven solutions.
+            </MudText>
+        </MudContainer>
+
+        @* Skills & Technologies *@
+        <MudContainer Class="mb-8">
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="d-flex align-center font-weight-bold mb-4">
+                <MudIcon Icon="@Icons.Material.Filled.Terminal" Class="mr-2" /> Tech Stack & Expertise
+            </MudText>
+            
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudText Typo="Typo.subtitle1" Class="font-weight-bold mb-2">Languages & Frameworks</MudText>
+                    <div class="d-flex flex-wrap gap-2">
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">C#</MudChip>
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">.NET 8 / .NET 10</MudChip>
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">Blazor (Server/WASM)</MudChip>
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">Web API</MudChip>
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">WPF & WinForms</MudChip>
+                        <MudChip T="string" Color="Color.Info" Variant="Variant.Filled">TypeScript</MudChip>
+                    </div>
+                </MudItem>
+                
+                <MudItem xs="12" md="6">
+                    <MudText Typo="Typo.subtitle1" Class="font-weight-bold mb-2">Databases & ORM</MudText>
+                    <div class="d-flex flex-wrap gap-2">
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">MSSQL</MudChip>
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">PostgreSQL</MudChip>
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">Entity Framework Core</MudChip>
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">Dapper</MudChip>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudText Typo="Typo.subtitle1" Class="font-weight-bold mb-2">Architecture & Practices</MudText>
+                    <div class="d-flex flex-wrap gap-2">
+                        <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">SOLID</MudChip>
+                        <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">MVVM</MudChip>
+                        <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">SCRUM / Agile</MudChip>
+                        <MudChip T="string" Color="Color.Warning" Variant="Variant.Filled">Code Review & Mentoring</MudChip>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudText Typo="Typo.subtitle1" Class="font-weight-bold mb-2">Tools & DevOps</MudText>
+                    <div class="d-flex flex-wrap gap-2">
+                        <MudChip T="string" Color="Color.Dark" Variant="Variant.Filled">Azure DevOps</MudChip>
+                        <MudChip T="string" Color="Color.Dark" Variant="Variant.Filled">Git</MudChip>
+                        <MudChip T="string" Color="Color.Dark" Variant="Variant.Filled">Jira & Confluence</MudChip>
+                        <MudChip T="string" Color="Color.Dark" Variant="Variant.Filled">Visual Studio</MudChip>
+                    </div>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+
+        @* Projects *@
+        <MudContainer Class="mb-8">
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="d-flex align-center font-weight-bold mb-4">
+                <MudIcon Icon="@Icons.Material.Filled.Code" Class="mr-2" /> Personal Projects
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-4">
+                Beyond my professional work, I actively develop applications that solve real-world problems. My personal portfolio includes modern PWAs, full-stack Blazor applications, desktop tools, and browser extensions used by hundreds of users.
+            </MudText>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" EndIcon="@Icons.Material.Filled.ArrowForward" Href="/projectsv2">
+                Browse My Projects
+            </MudButton>
+        </MudContainer>
+
+        <MudDivider Class="my-6" />
+
+        @* Contact me *@
+        <MudContainer Class="text-center">
+            <MudText Typo="Typo.h5" Color="Color.Primary" Class="font-weight-bold mb-4">
+                Let's Connect
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-4" Color="Color.Surface">
+                Feel free to check out my source code or connect with me professionally.
+            </MudText>
+
+            <MudButtonGroup Class="d-flex justify-center" Color="Color.Primary" Variant="Variant.Outlined" Style="box-shadow: none;">
+                <MudButton StartIcon="@Icons.Custom.Brands.GitHub" IconColor="Color.Primary" Href="https://github.com/Coke21" Target="_blank">
+                    GitHub
+                </MudButton>
+                <MudButton StartIcon="@Icons.Custom.Brands.LinkedIn" IconColor="Color.Primary" Href="https://www.linkedin.com/in/artur" Target="_blank">
+                    LinkedIn
+                </MudButton>
+            </MudButtonGroup>
+        </MudContainer>
+
+    </MudPaper>
+</MudContainer>
