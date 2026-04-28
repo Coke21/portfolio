@@ -5,7 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Artur's Portfolio</title>
-    <base href="/portfolio/" />
+    <script>
+        //Automatically set base href depending on environment (local vs prod)
+        const baseElement = document.createElement('base');
+        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        baseElement.href = isDevelopment ? '/' : '/portfolio/';
+        document.head.appendChild(baseElement);
+    </script>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
